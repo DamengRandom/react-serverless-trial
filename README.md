@@ -2,7 +2,6 @@
 
 
 ### Setup & Run app
-- Run the app by following commands:
 
 ```js
 Run `yarn`

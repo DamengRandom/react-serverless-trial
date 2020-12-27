@@ -1,17 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { StyledGame, StyledScore, StyledTimer, StyledCharacter } from '../styled/Game';
 import { Strong } from '../styled/Random';
+import { useScore } from '../contexts/ScoreContext';
 
 export default function Game({ history }) {
   const MAX_SECONDS = 5;
   const randomCharacters = 'abcdefghijklmnopqrstuvwxyz0123456789';
   const [currentCharacter, setCurrentCharacter] = useState('');
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useScore();
   const [ms, setMs] = useState(0);
   const [seconds, setSeconds] = useState(MAX_SECONDS);
 
   useEffect(() => {
     setRandomCharacter();
+    setScore(0);
     const currentTime = new Date();
     const interval = setInterval(() => updateTime(currentTime), 1);
 
@@ -22,13 +24,11 @@ export default function Game({ history }) {
 
   useEffect(() => {
     if (seconds <= -1) {
-      console.log('Game over ..');
       history.push('/gameOver');
     }
   }, [seconds, ms, history]);
 
   const KeyUpHandler = useCallback((e) => {
-    console.log(e.key, currentCharacter)
     if (e.key === currentCharacter) {
       setScore(prevScore => prevScore + 1);
     } else {
@@ -56,7 +56,6 @@ export default function Game({ history }) {
     const updatedSeconds = MAX_SECONDS - parseInt(formattedMSString.substring(0, 2)) - 1;
     const updatedMs = 1000 - parseInt(formattedMSString.substring(formattedMSString.length - 3));
 
-    // console.log(`${addLeadingZeros(updatedSeconds, 2)}: ${addLeadingZeros(updatedMs, 3)}`);
     setSeconds(addLeadingZeros(updatedSeconds, 2));
     setMs(addLeadingZeros(updatedMs, 3));
   };

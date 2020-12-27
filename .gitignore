@@ -25,3 +25,5 @@ yarn-error.log*
 # common
 .eslintcache
 # public/
+# Local Netlify folder
+.netlify

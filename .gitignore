@@ -24,4 +24,4 @@ yarn-error.log*
 
 # common
 .eslintcache
-public/
+# public/

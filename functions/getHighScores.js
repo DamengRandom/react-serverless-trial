@@ -1,6 +1,6 @@
 require('dotenv').config();
 const Airtable = require('airtable');
-const values = require('../configs');
+// const values = require('../configs');
 
 Airtable.configure({
   // apiKey: values.AIRTABLE_API_KEY

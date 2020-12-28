@@ -4,11 +4,7 @@ import CTA from '../styled/CTA';
 import { Accent, StyledTitle } from '../styled/Random';
 
 export default function Home() {
-  const { user, isAuthenticated, isLoading } = useAuth0();
-
-  if (isLoading) {
-    return <div>Loading ...</div>;
-  }
+  const { user, isAuthenticated } = useAuth0();
 
   return isAuthenticated ? (
     <div>

@@ -1,4 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from "react-router-dom";
 import { useScore } from '../contexts/ScoreContext';
 import { Strong } from '../styled/Random';
 
@@ -20,11 +21,11 @@ export default function GameOver({ history }) {
         })
       }
       const res = await fetch('/.netlify/functions/saveHighScore', options);
-      const data = await res.json();
+      await res.json();
 
-      if (data) {
-        history.push('/');
-      }
+      // if (data) {
+      //   history.push('/');
+      // }
     } catch (error) {
       console.log(error);
     }
@@ -34,6 +35,7 @@ export default function GameOver({ history }) {
     <div>
       <p>GameOver: <Strong>{score}</Strong></p>
       <button onClick={saveHighScore}>Save your record</button>
+      <Link to="/">Back to home</Link>
     </div>
   );
 };

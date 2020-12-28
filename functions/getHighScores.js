@@ -14,7 +14,10 @@ const table = base(process.env.AIRTABLE_TABLE_NAME);
 
 exports.handler = async () => {
   try {
-    const records = await table.select({}).firstPage();
+    const records = await table
+      // .select({})
+      .select({ sort: [{ field: 'score', direction: 'desc' }], filterByFormula: `AND(name != "", score > 0)` }) // artable query filter functionality
+      .firstPage();
     // const formattedRecords = records.map(record => ({
     //   id: record.id,
     //   fields: record.fields,

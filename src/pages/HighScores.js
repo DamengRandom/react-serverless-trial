@@ -7,7 +7,7 @@ export default function HighScores() {
   useEffect(() => {
     const loadHighScores = async () => {
       try {
-        const res = await fetch('/.netlify/functions/getHighScores');
+        const res = await fetch('/.netlify/functions/getHighScores'); // path of lambda/ serverless function
         const scores = await res.json();
         console.log('scores? ', scores);
         setHighScores(scores);

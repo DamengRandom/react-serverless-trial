@@ -22,7 +22,6 @@ exports.handler = async (event) => {
 
   // const { name, score } = JSON.parse(event.body);
   const body = JSON.parse(event.body);
-  console.log('body: ', body);
 
   if (!body) {
     return {

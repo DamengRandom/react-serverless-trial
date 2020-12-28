@@ -1,9 +1,10 @@
-
+import { useAuth0 } from "@auth0/auth0-react";
 import { useScore } from '../contexts/ScoreContext';
 import { Strong } from '../styled/Random';
 
 export default function GameOver({ history }) {
   const [score] = useScore();
+  const { user: { name: username } } = useAuth0();
 
   if (score === -1) {
     history.push('/');
@@ -14,13 +15,16 @@ export default function GameOver({ history }) {
       const options = {
         method: 'POST',
         body: JSON.stringify({
-          name: 'trial 01',
+          name: username,
           score,
         })
       }
       const res = await fetch('/.netlify/functions/saveHighScore', options);
       const data = await res.json();
-      console.log('made it: ', data);
+
+      if (data) {
+        history.push('/');
+      }
     } catch (error) {
       console.log(error);
     }
